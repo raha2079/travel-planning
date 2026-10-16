@@ -61,14 +61,14 @@ done
 echo ""
 echo "Running verifier tests..."
 echo "Test 1: Golden case (should PASS)"
-python3 verifier/task.py tests/output.json \
+python3 tests/test_verifier_standalone.py tests/output.json \
     --request tests/request.json \
     --options tests/options.json \
     --trace tests/action_trace.json
 
 echo ""
 echo "Test 2: Bad budget (should FAIL)"
-if python3 verifier/task.py tests/bad_budget.json \
+if python3 tests/test_verifier_standalone.py tests/bad_budget.json \
     --request tests/request.json \
     --options tests/options.json \
     --trace tests/action_trace.json; then
@@ -80,7 +80,7 @@ fi
 
 echo ""
 echo "Test 3: Bad trace (should FAIL)"
-if python3 verifier/task.py tests/output.json \
+if python3 tests/test_verifier_standalone.py tests/output.json \
     --request tests/request.json \
     --options tests/options.json \
     --trace tests/bad_trace.json; then

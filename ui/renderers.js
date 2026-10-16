@@ -1,8 +1,10 @@
 /**
- * UI renderers for travel planning plugin results
+ * UI renderers for travel planning plugin results.
+ * Export renderers by output class name.
  */
 
-export function renderResult(result) {
+// Renderer for TravelPlanningOutput (task output)
+function renderTravelPlanningOutput(result) {
   if (!result) return '';
 
   return `
@@ -30,16 +32,17 @@ export function renderResult(result) {
   `;
 }
 
-export function renderVerdict(verdict) {
-  if (!verdict) return '';
-
-  const isPass = verdict.includes('PASS');
-  const className = isPass ? 'verdict-pass' : 'verdict-fail';
-
-  return `
-    <div class="verdict ${className}">
-      <div class="verdict-status">${isPass ? '✓ PASS' : '✗ FAIL'}</div>
-      <pre class="verdict-details">${verdict}</pre>
-    </div>
-  `;
+// Renderer for ValidateSelectionOutput (same as task output)
+function renderValidateSelectionOutput(result) {
+  return renderTravelPlanningOutput(result);
 }
+
+// Export renderers by output class name as default export
+export default {
+  TravelPlanningOutput: renderTravelPlanningOutput,
+  ValidateSelectionOutput: renderValidateSelectionOutput,
+  LoadRequestOutput: (result) => `<pre>${JSON.stringify(result, null, 2)}</pre>`,
+  SearchFlightsOutput: (result) => `<pre>${JSON.stringify(result, null, 2)}</pre>`,
+  SearchHotelsOutput: (result) => `<pre>${JSON.stringify(result, null, 2)}</pre>`,
+  CheckBudgetOutput: (result) => `<pre>${JSON.stringify(result, null, 2)}</pre>`,
+};

@@ -7,6 +7,7 @@ requires-python = ">=3.12"
 dependencies = [
     # nanoagent is provided by the RUSH Lab runtime environment
     "mcp>=1.0.0",
+    "slimconfig",
 ]
 
 [build-system]

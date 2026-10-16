@@ -1,15 +1,13 @@
-"""Type contracts for travel planning task.
-
-This module defines the structured input and output types for all tools and tasks
-in the travel planning plugin, following nanoagent's structured I/O principle.
-"""
+"""Type contracts for travel planning task."""
 
 from dataclasses import dataclass
 from enum import Enum
+from typing import Annotated
+from slimconfig import Output
 
 
 class Tool(str, Enum):
-    """Available tools for travel planning workflow."""
+    """Available tools."""
     LOAD_REQUEST = "load_request"
     SEARCH_FLIGHTS = "search_flights"
     SEARCH_HOTELS = "search_hotels"
@@ -25,87 +23,96 @@ class Task(str, Enum):
 # Tool Input/Output Contracts
 
 @dataclass
-class LoadRequestInput:
-    """Input for load_request tool (no parameters needed)."""
+class LoadRequestInput(Output):
+    """Input for load_request tool."""
     pass
 
 
 @dataclass
-class LoadRequestOutput:
+class LoadRequestOutput(Output):
     """Output from load_request tool."""
-    origin: str
-    destination: str
-    budget: float
-    currency: str
+    origin: Annotated[str, "Origin city"]
+    destination: Annotated[str, "Destination city"]
+    budget: Annotated[float, "Total budget for trip"]
+    currency: Annotated[str, "Currency code (e.g., USD)"]
 
 
 @dataclass
-class SearchFlightsInput:
-    """Input for search_flights tool (no parameters needed)."""
+class SearchFlightsInput(Output):
+    """Input for search_flights tool."""
     pass
 
 
 @dataclass
-class SearchFlightsOutput:
+class SearchFlightsOutput(Output):
     """Output from search_flights tool."""
-    flight_ids: list[str]
-    selected_flight_id: str
+    flight_ids: Annotated[list[str], "List of all available flight IDs"]
+    selected_flight_id: Annotated[str, "ID of the selected flight"]
 
 
 @dataclass
-class SearchHotelsInput:
-    """Input for search_hotels tool (no parameters needed)."""
+class SearchHotelsInput(Output):
+    """Input for search_hotels tool."""
     pass
 
 
 @dataclass
-class SearchHotelsOutput:
+class SearchHotelsOutput(Output):
     """Output from search_hotels tool."""
-    hotel_ids: list[str]
-    selected_hotel_id: str
+    hotel_ids: Annotated[list[str], "List of all available hotel IDs"]
+    selected_hotel_id: Annotated[str, "ID of the selected hotel"]
 
 
 @dataclass
-class CheckBudgetInput:
-    """Input for check_budget tool (no parameters needed)."""
+class CheckBudgetInput(Output):
+    """Input for check_budget tool."""
     pass
 
 
 @dataclass
-class CheckBudgetOutput:
+class CheckBudgetOutput(Output):
     """Output from check_budget tool with full calculation breakdown."""
-    flight_price: float
-    nightly_price: float
-    hotel_nights: int
-    lodging_total: float
-    total_cost: float
-    budget: float
-    within_budget: bool
+    flight_price: Annotated[float, "Price of selected flight"]
+    nightly_price: Annotated[float, "Hotel price per night"]
+    hotel_nights: Annotated[int, "Number of hotel nights"]
+    lodging_total: Annotated[float, "Total lodging cost (nightly_price × nights)"]
+    total_cost: Annotated[float, "Total trip cost (flight + lodging)"]
+    budget: Annotated[float, "Budget limit"]
+    within_budget: Annotated[bool, "True if total_cost <= budget"]
 
 
 @dataclass
-class ValidateSelectionInput:
-    """Input for validate_selection tool (no parameters needed)."""
+class ValidateSelectionInput(Output):
+    """Input for validate_selection tool."""
     pass
 
 
 @dataclass
-class ValidateSelectionOutput:
+class ValidateSelectionOutput(Output):
     """Output from validate_selection tool."""
-    flight_id: str
-    hotel_id: str
-    hotel_nights: int
-    total_cost: float
-    currency: str
+    flight_id: Annotated[str, "Selected flight ID"]
+    hotel_id: Annotated[str, "Selected hotel ID"]
+    hotel_nights: Annotated[int, "Number of hotel nights booked"]
+    total_cost: Annotated[float, "Total trip cost"]
+    currency: Annotated[str, "Currency code"]
 
 
-# Task Input Contract
+# Task Input/Output Contracts
 
 @dataclass
-class TravelPlanningInput:
+class TravelPlanningInput(Output):
     """Input for the travel planning task."""
-    # These fields will be provided by the nanoagent framework
-    # and made available to tools through the plugin context
+    pass
+
+
+@dataclass
+class TravelPlanningOutput(Output):
+    """Output from the travel planning task."""
+    flight_id: Annotated[str, "Selected flight ID"]
+    hotel_id: Annotated[str, "Selected hotel ID"]
+    hotel_nights: Annotated[int, "Number of hotel nights"]
+    total_cost: Annotated[float, "Total cost"]
+    currency: Annotated[str, "Currency code"]
 
 
 # Tool and Task Mappings
@@ -119,5 +126,5 @@ TOOLS = {
 }
 
 TASKS = {
-    Task.TRAVEL_PLANNING: TravelPlanningInput,
+    Task.TRAVEL_PLANNING: (TravelPlanningInput, TravelPlanningOutput),
 }
