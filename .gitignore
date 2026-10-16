@@ -1,3 +1,8 @@
+# Required by RUSH Lab
+.venv/
+*.pyc
+.ruff_cache/
+
 # Python
 __pycache__/
 *.py[cod]
@@ -24,11 +29,9 @@ wheels/
 venv/
 ENV/
 env/
-.venv
 
 # uv
 .uv/
-uv.lock
 
 # Testing
 .pytest_cache/

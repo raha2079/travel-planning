@@ -110,7 +110,7 @@ class TravelPlanningInput:
 
 # Tool and Task Mappings
 
-TOOLS: dict[Tool, tuple[type, type]] = {
+TOOLS = {
     Tool.LOAD_REQUEST: (LoadRequestInput, LoadRequestOutput),
     Tool.SEARCH_FLIGHTS: (SearchFlightsInput, SearchFlightsOutput),
     Tool.SEARCH_HOTELS: (SearchHotelsInput, SearchHotelsOutput),
@@ -118,6 +118,6 @@ TOOLS: dict[Tool, tuple[type, type]] = {
     Tool.VALIDATE_SELECTION: (ValidateSelectionInput, ValidateSelectionOutput),
 }
 
-TASKS: dict[Task, type] = {
+TASKS = {
     Task.TRAVEL_PLANNING: TravelPlanningInput,
 }

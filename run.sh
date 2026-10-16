@@ -1,22 +1,42 @@
 #!/usr/bin/env bash
-# Environment validation script for travel planning plugin
-
+# Template checks (required by RUSH Lab)
 set -euo pipefail
 
+echo "Running template checks..."
+
+# Check Python is available
+if ! command -v python3 &> /dev/null; then
+    echo "Error: python3 not found"
+    exit 1
+fi
+
+# Check uv is available
+if ! command -v uv &> /dev/null; then
+    echo "Error: uv not found. Install from https://github.com/astral-sh/uv"
+    exit 1
+fi
+
+# Check required files exist
+for file in contract.py nanoagent.yaml pyproject.toml uv.lock; do
+    if [ ! -f "$file" ]; then
+        echo "Error: Required file $file not found"
+        exit 1
+    fi
+done
+
+echo "Template checks passed."
+echo ""
+
+# Plugin-specific validation
 echo "=== Travel Planning Plugin Environment Check ==="
 
 # Check Python version
 echo -n "Python version: "
 python3 --version
 
-# Check uv is installed
+# Check uv version
 echo -n "uv version: "
-if command -v uv &> /dev/null; then
-    uv --version
-else
-    echo "ERROR: uv not found. Install from https://github.com/astral-sh/uv"
-    exit 1
-fi
+uv --version
 
 # Check required files
 echo "Checking required files..."

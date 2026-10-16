@@ -1,0 +1,19 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="32" cy="32" r="30" fill="#4A90E2" opacity="0.1"/>
+
+  <!-- Airplane icon -->
+  <path d="M52 20L32 32L12 24L8 26L20 38L16 48L20 50L28 42L40 48L44 46L48 28L52 20Z"
+        fill="#4A90E2" stroke="#2E5C8A" stroke-width="1.5" stroke-linejoin="round"/>
+
+  <!-- Hotel/Building icon -->
+  <rect x="18" y="40" width="12" height="16" fill="#E67E22" stroke="#C0621F" stroke-width="1.5"/>
+  <rect x="20" y="44" width="2" height="3" fill="white"/>
+  <rect x="24" y="44" width="2" height="3" fill="white"/>
+  <rect x="20" y="49" width="2" height="3" fill="white"/>
+  <rect x="24" y="49" width="2" height="3" fill="white"/>
+
+  <!-- Dollar sign for budget -->
+  <circle cx="48" cy="48" r="8" fill="#27AE60" stroke="#1E8449" stroke-width="1.5"/>
+  <text x="48" y="53" font-family="Arial" font-size="12" font-weight="bold" fill="white" text-anchor="middle">$</text>
+</svg>
