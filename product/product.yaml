@@ -8,7 +8,7 @@ summary: |
 highlights:
   - Select preferred flight and verify route matches origin → destination
   - Find hotel in destination city within remaining budget
-  - Calculate exact total: flight_price + (hotel_nightly_price × nights)
+  - "Calculate exact total: flight_price + (hotel_nightly_price × nights)"
   - Validate complete workflow trace with 5 evidence payloads
 steps:
   - Load travel request with budget, preferences, and constraints

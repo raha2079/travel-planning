@@ -16,8 +16,8 @@ build-backend = "hatchling.build"
 [tool.hatch.build.targets.wheel]
 packages = ["src/plugin"]
 
-# [tool.uv.sources]
-# slimconfig source will be provided by RUSH Lab runtime
+[tool.uv.sources]
+slimconfig = { git = "https://github.com/zeyuyang8/slimconfig", rev = "e61217e" }
 
 [dependency-groups]
 dev = [

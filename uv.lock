@@ -351,7 +351,7 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "mcp", specifier = ">=1.27,<2" },
-    { name = "slimconfig" },
+    { name = "slimconfig", git = "https://github.com/zeyuyang8/slimconfig?rev=e61217e" },
 ]
 
 [package.metadata.requires-dev]
@@ -779,15 +779,11 @@ wheels = [
 
 [[package]]
 name = "slimconfig"
-version = "0.14.0"
-source = { registry = "https://pypi.org/simple" }
+version = "0.18.0"
+source = { git = "https://github.com/zeyuyang8/slimconfig?rev=e61217e#e61217e96a47b763641d40e9f14efd692de80e47" }
 dependencies = [
     { name = "omegaconf" },
     { name = "pyyaml" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/c4/d6/94e699831b1c4d01f64e061a2351a059f637acbb6de1e8977d9e5a8d2510/slimconfig-0.14.0.tar.gz", hash = "sha256:fb2c5d3cdef0fec39e8049863abffa633897f67d435faad12ff27e538dfb7b10", size = 67109, upload-time = "2026-09-10T20:52:12.17Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/d8/36/034ee412fef4a0b6a0f8c98bb6cc941355e7df41e00b1cf3e132f4aa6397/slimconfig-0.14.0-py3-none-any.whl", hash = "sha256:cbe206f13b8a94529d8a1b3ac4a12cb3b41df5efc5752af9bc458bfc165a721e", size = 47066, upload-time = "2026-09-10T20:52:10.888Z" },
 ]
 
 [[package]]
