@@ -17,7 +17,7 @@ build-backend = "hatchling.build"
 packages = ["src/plugin"]
 
 [tool.uv.sources]
-slimconfig = { git = "https://github.com/zeyuyang8/slimconfig", rev = "e61217e" }
+slimconfig = { git = "https://github.com/zeyuyang8/slimconfig", branch = "master" }
 
 [dependency-groups]
 dev = [
