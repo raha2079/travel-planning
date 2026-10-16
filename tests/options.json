@@ -1,0 +1,41 @@
+{
+  "request": {
+    "origin": "NYC",
+    "destination": "Paris",
+    "budget": 1800,
+    "currency": "USD",
+    "preferences": {
+      "flight_id": "fl-2",
+      "hotel_nights": 3
+    }
+  },
+  "options": {
+    "flights": [
+      {
+        "id": "fl-1",
+        "origin": "NYC",
+        "destination": "Paris",
+        "price": 650
+      },
+      {
+        "id": "fl-2",
+        "origin": "NYC",
+        "destination": "Paris",
+        "price": 720
+      }
+    ],
+    "hotels": [
+      {
+        "id": "ht-1",
+        "city": "Paris",
+        "nightly_price": 280
+      },
+      {
+        "id": "ht-2",
+        "city": "Paris",
+        "nightly_price": 300
+      }
+    ],
+    "trains": []
+  }
+}

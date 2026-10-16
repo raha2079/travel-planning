@@ -1,0 +1,53 @@
+[
+  {
+    "action": "load_request",
+    "data": {
+      "origin": "NYC",
+      "destination": "Paris",
+      "budget": 1500,
+      "currency": "USD"
+    }
+  },
+  {
+    "action": "search_flights",
+    "data": {
+      "flight_ids": [
+        "fl-1",
+        "fl-2"
+      ],
+      "selected_flight_id": "fl-2"
+    }
+  },
+  {
+    "action": "search_hotels",
+    "data": {
+      "hotel_ids": [
+        "ht-1",
+        "ht-2"
+      ],
+      "selected_hotel_id": "ht-1"
+    }
+  },
+  {
+    "action": "check_budget",
+    "data": {
+      "flight_price": 720,
+      "nightly_price": 280,
+      "hotel_nights": 3,
+      "lodging_total": 840,
+      "total_cost": 1560,
+      "budget": 1500,
+      "within_budget": false
+    }
+  },
+  {
+    "action": "validate_selection",
+    "data": {
+      "flight_id": "fl-2",
+      "hotel_id": "ht-1",
+      "hotel_nights": 3,
+      "total_cost": 1560,
+      "currency": "USD"
+    }
+  }
+]

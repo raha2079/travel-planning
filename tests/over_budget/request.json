@@ -1,0 +1,10 @@
+{
+  "origin": "NYC",
+  "destination": "Paris",
+  "budget": 1500,
+  "currency": "USD",
+  "preferences": {
+    "flight_id": "fl-2",
+    "hotel_nights": 3
+  }
+}

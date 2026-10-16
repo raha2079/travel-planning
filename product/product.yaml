@@ -1,0 +1,22 @@
+name: Travel Planning
+tagline: Budget-constrained flight and hotel selection with workflow verification
+description: |
+  Tests AI agent ability to select valid transport and lodging within budget constraints.
+
+  Validates:
+  - Preference matching (specific flight, hotel nights)
+  - Budget calculations (flight + hotel × nights)
+  - Route and destination correctness
+  - Complete workflow trace with evidence
+
+  The verifier independently recalculates all costs and verifies every constraint
+  without using an LLM as judge.
+
+category: planning
+difficulty: intermediate
+tags:
+  - planning
+  - budget
+  - calculations
+  - workflow
+  - deterministic

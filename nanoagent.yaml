@@ -1,0 +1,68 @@
+_ > nanoagent.plugin.manifest.ManifestConfig:
+id: travel-planning
+name: Travel Planning
+version: 0.1.0
+status: ready
+
+runtime > nanoagent.plugin.manifest.RuntimeConfig:
+  type: mcp_stdio
+  command: [uv, run, --frozen, python, -m, plugin]
+
+permissions > nanoagent.plugin.manifest.PermissionsConfig:
+  network > nanoagent.plugin.manifest.NetworkConfig:
+    hosts: []
+  filesystem > nanoagent.plugin.manifest.FilesystemConfig:
+    write: [workspace]
+
+# Tools available to the agent
+tools > dict[contract.Tool, nanoagent.plugin.manifest.ToolConfig]:
+  load_request:
+    description: Load the travel request with origin, destination, budget, currency, and preferences
+  search_flights:
+    description: Search available flights, select the preferred one, and return the flight IDs list
+  search_hotels:
+    description: Search available hotels, select one that fits budget, and return the hotel IDs list
+  check_budget:
+    description: Calculate total cost (flight + hotel × nights) with full breakdown and check if within budget
+  validate_selection:
+    description: Validate the final selection and return all booking details
+
+# Task definition
+tasks > dict[contract.Task, nanoagent.plugin.manifest.TaskConfig]:
+  travel-planning:
+    description: Select a flight and hotel within budget, respecting traveler preferences for specific flight and number of hotel nights
+    runner: agent
+    tools: [load_request, search_flights, search_hotels, check_budget, validate_selection]
+    instructions: |-
+      Goal: Select valid transport and lodging options within the requested budget.
+
+      Workflow (must follow exactly in this order):
+      1. Call load_request to get origin, destination, budget, currency from the travel request
+      2. Call search_flights to get available flights and select the preferred flight ID
+      3. Call search_hotels to get available hotels and select one in the destination city
+      4. Call check_budget to calculate the total cost with full breakdown and verify it's within budget
+      5. Call validate_selection to confirm the final selection
+
+      Critical Requirements:
+      - You MUST select the preferred_flight_id from the request preferences
+      - You MUST book hotel for exactly the number of nights in the preferences (hotel_nights)
+      - The selected flight route must match origin → destination from the request
+      - The selected hotel must be located in the destination city
+      - Calculate total cost exactly as: flight_price + (hotel_nightly_price × hotel_nights)
+      - The total cost must NOT exceed the budget
+      - All prices must be in the same currency
+
+      ID Validation:
+      - Do not trust IDs without verifying them against the actual records
+      - Match selected IDs to records to confirm route, city, and prices
+      - Re-check every selected ID and preference before finalizing
+
+      Action Trace Evidence:
+      Your workflow must produce exactly 5 action trace events with complete data:
+      1. load_request: {origin, destination, budget, currency}
+      2. search_flights: {flight_ids: [all available], selected_flight_id}
+      3. search_hotels: {hotel_ids: [all available], selected_hotel_id}
+      4. check_budget: {flight_price, nightly_price, hotel_nights, lodging_total, total_cost, budget, within_budget}
+      5. validate_selection: {flight_id, hotel_id, hotel_nights, total_cost, currency}
+
+      The verifier will independently recalculate all costs and verify every constraint.
