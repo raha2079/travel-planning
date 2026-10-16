@@ -1,4 +1,4 @@
-nanoagent: 0.5
+nanoagent: ~=0.5.0
 
 _ > nanoagent.plugin.manifest.ManifestConfig:
 id: travel-planning

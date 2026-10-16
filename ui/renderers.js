@@ -3,7 +3,7 @@
  * Export renderers by output class name.
  */
 
-// Renderer for TravelPlanningOutput (task output)
+// Renderer for TravelPlanningOutput (the task output)
 function renderTravelPlanningOutput(result) {
   if (!result) return '';
 
@@ -32,17 +32,7 @@ function renderTravelPlanningOutput(result) {
   `;
 }
 
-// Renderer for ValidateSelectionOutput (same as task output)
-function renderValidateSelectionOutput(result) {
-  return renderTravelPlanningOutput(result);
-}
-
-// Export renderers by output class name as default export
+// Export only the task output renderer
 export default {
   TravelPlanningOutput: renderTravelPlanningOutput,
-  ValidateSelectionOutput: renderValidateSelectionOutput,
-  LoadRequestOutput: (result) => `<pre>${JSON.stringify(result, null, 2)}</pre>`,
-  SearchFlightsOutput: (result) => `<pre>${JSON.stringify(result, null, 2)}</pre>`,
-  SearchHotelsOutput: (result) => `<pre>${JSON.stringify(result, null, 2)}</pre>`,
-  CheckBudgetOutput: (result) => `<pre>${JSON.stringify(result, null, 2)}</pre>`,
 };

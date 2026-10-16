@@ -1,13 +1,11 @@
 [project]
-name = "travel-planning"
+name = "nanoagent-travel-planning"
 version = "0.1.0"
 description = "Travel planning plugin for nanoagent - select flight and hotel within budget"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    # nanoagent is provided by the RUSH Lab runtime environment
-    "mcp>=1.0.0",
-    "slimconfig",
+    "mcp>=1.27,<2",
 ]
 
 [build-system]
@@ -17,7 +15,13 @@ build-backend = "hatchling.build"
 [tool.hatch.build.targets.wheel]
 packages = ["src/plugin"]
 
+[tool.uv.sources]
+slimconfig = { git = "https://github.com/RUSH-LAB/slimconfig", rev = "42b6c59" }
+
 [dependency-groups]
 dev = [
     "pytest>=8.0.0",
 ]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]

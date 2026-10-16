@@ -1,3 +1,4 @@
+_ > nanoagent.plugin.manifest.ProductConfig:
 name: Travel Planning
 tagline: Budget-constrained flight and hotel selection with workflow verification
 description: |
