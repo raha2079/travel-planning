@@ -1,27 +1,22 @@
 #!/usr/bin/env bash
-# Environment validation script
+# Exits 0 when this environment can run the plugin. NanoAgent runs it before every launch,
+# with the environment the plugin will get.
 
 set -euo pipefail
 
-# Template checks (required)
+cd "$(dirname "$0")"
+
 command -v uv >/dev/null || { echo "uv is not installed" >&2; exit 1; }
 
-if [[ -f .env ]]; then
-    while IFS='=' read -r key value; do
-        # Skip comments and empty lines
-        [[ "$key" =~ ^[[:space:]]*# ]] && continue
-        [[ -z "$key" ]] && continue
-        # Check if variable is set in environment
-        if [[ -z "${!key:-}" ]]; then
-            echo "Environment variable $key is not set" >&2
-            exit 1
-        fi
-    done < .env
-fi
+while IFS= read -r line || [[ -n "$line" ]]; do
+    name="${line%%=*}"
+    [[ -z "$name" || "$name" == \#* ]] && continue
+    [[ -n "${!name:-}" ]] || { echo "$name is not set (declared in .env)" >&2; exit 1; }
+done < .env
 
-uv sync --frozen --quiet || { echo "uv.lock is out of date with pyproject.toml" >&2; exit 1; }
+uv lock --check --offline --quiet || { echo "uv.lock is out of date with pyproject.toml" >&2; exit 1; }
 
-# Plugin-specific checks
+# Travel Planning plugin checks
 echo "=== Travel Planning Plugin Environment Check ==="
 
 # Check Python version

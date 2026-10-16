@@ -1,23 +1,17 @@
 _ > nanoagent.plugin.manifest.ProductConfig:
-name: Travel Planning
 tagline: Budget-constrained flight and hotel selection with workflow verification
-description: |
+summary: |
   Tests AI agent ability to select valid transport and lodging within budget constraints.
-
-  Validates:
-  - Preference matching (specific flight, hotel nights)
-  - Budget calculations (flight + hotel × nights)
-  - Route and destination correctness
-  - Complete workflow trace with evidence
-
-  The verifier independently recalculates all costs and verifies every constraint
-  without using an LLM as judge.
-
-category: planning
-difficulty: intermediate
-tags:
-  - planning
-  - budget
-  - calculations
-  - workflow
-  - deterministic
+  The agent must choose the preferred flight, find a hotel in the destination city, and
+  ensure the total cost (flight + hotel × nights) stays within budget. The verifier
+  independently recalculates all costs and validates every constraint without using an LLM.
+highlights:
+  - Select preferred flight and verify route matches origin → destination
+  - Find hotel in destination city within remaining budget
+  - Calculate exact total: flight_price + (hotel_nightly_price × nights)
+  - Validate complete workflow trace with 5 evidence payloads
+steps:
+  - Load travel request with budget, preferences, and constraints
+  - Search flights and select the preferred flight by ID
+  - Search hotels in destination city that fit within remaining budget
+  - Calculate total cost and verify it does not exceed budget

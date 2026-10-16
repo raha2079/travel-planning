@@ -4,13 +4,13 @@ A nanoagent plugin that validates AI agent performance on budget-constrained tra
 
 ## Tools
 
-The plugin provides five workflow tools that the agent must call in sequence:
+The plugin provides tools for the `travel-planning` task:
 
-- **load_request** - Load the travel request with origin, destination, budget, currency, and preferences
-- **search_flights** - Search available flights and select the preferred flight ID
-- **search_hotels** - Search available hotels in the destination city
-- **check_budget** - Calculate total cost (flight + hotel × nights) and verify within budget
-- **validate_selection** - Validate and return the final booking details (answer key)
+- `load_request` - Load the travel request with origin, destination, budget, currency, and preferences
+- `search_flights` - Search available flights and select the preferred flight ID
+- `search_hotels` - Search available hotels in the destination city
+- `check_budget` - Calculate total cost (flight + hotel × nights) and verify within budget
+- `validate_selection` - Validate and return the final booking details (answer key)
 
 ## Layout
 
