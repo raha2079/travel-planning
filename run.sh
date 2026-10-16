@@ -1,33 +1,27 @@
 #!/usr/bin/env bash
-# Template checks (required by RUSH Lab)
+# Environment validation script
+
 set -euo pipefail
 
-echo "Running template checks..."
+# Template checks (required)
+command -v uv >/dev/null || { echo "uv is not installed" >&2; exit 1; }
 
-# Check Python is available
-if ! command -v python3 &> /dev/null; then
-    echo "Error: python3 not found"
-    exit 1
+if [[ -f .env ]]; then
+    while IFS='=' read -r key value; do
+        # Skip comments and empty lines
+        [[ "$key" =~ ^[[:space:]]*# ]] && continue
+        [[ -z "$key" ]] && continue
+        # Check if variable is set in environment
+        if [[ -z "${!key:-}" ]]; then
+            echo "Environment variable $key is not set" >&2
+            exit 1
+        fi
+    done < .env
 fi
 
-# Check uv is available
-if ! command -v uv &> /dev/null; then
-    echo "Error: uv not found. Install from https://github.com/astral-sh/uv"
-    exit 1
-fi
+uv sync --frozen --quiet || { echo "uv.lock is out of date with pyproject.toml" >&2; exit 1; }
 
-# Check required files exist
-for file in contract.py nanoagent.yaml pyproject.toml uv.lock; do
-    if [ ! -f "$file" ]; then
-        echo "Error: Required file $file not found"
-        exit 1
-    fi
-done
-
-echo "Template checks passed."
-echo ""
-
-# Plugin-specific validation
+# Plugin-specific checks
 echo "=== Travel Planning Plugin Environment Check ==="
 
 # Check Python version

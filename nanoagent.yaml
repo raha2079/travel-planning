@@ -1,3 +1,5 @@
+nanoagent: 0.5
+
 _ > nanoagent.plugin.manifest.ManifestConfig:
 id: travel-planning
 name: Travel Planning
@@ -33,6 +35,7 @@ tasks > dict[contract.Task, nanoagent.plugin.manifest.TaskConfig]:
     description: Select a flight and hotel within budget, respecting traveler preferences for specific flight and number of hotel nights
     runner: agent
     tools: [load_request, search_flights, search_hotels, check_budget, validate_selection]
+    reference: validate_selection
     instructions: |-
       Goal: Select valid transport and lodging options within the requested budget.
 

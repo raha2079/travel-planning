@@ -2,7 +2,7 @@
 
 from pathlib import Path
 import json
-from verifier import task as task_verifier
+from . import task as task_verifier
 
 
 def verify_input(tool, value):
@@ -35,7 +35,7 @@ def verify_output(tool, input_value, output_value, workspace):
     return None
 
 
-def verify_task(task, arguments, reference, workspace):
+def verify_task(task, arguments, reference, workspace, action_trace):
     """Verify task completion.
 
     Args:
@@ -43,6 +43,7 @@ def verify_task(task, arguments, reference, workspace):
         arguments: Task input arguments
         reference: Reference/expected output
         workspace: Path to workspace directory
+        action_trace: List of action trace events
 
     Returns:
         Verdict string ("PASS" or "FAIL\\n..." with errors)
