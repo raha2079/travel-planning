@@ -144,8 +144,8 @@ def verify(output_path, request_path, options_path, trace_path):
             if expected_total > budget:
                 errors.append(f"calculated total {expected_total} exceeds budget {budget}")
 
-        if not isinstance(trace, list) or len(trace) != 5:
-            errors.append("action trace must contain exactly five ordered workflow events")
+        if not isinstance(trace, list) or len(trace) != 4:
+            errors.append("action trace must contain exactly four ordered workflow events")
         else:
             expected_events = []
             expected_events.append(("load_request", {"origin": r["origin"], "destination": r["destination"], "budget": budget, "currency": r["currency"]}))
@@ -164,7 +164,6 @@ def verify(output_path, request_path, options_path, trace_path):
                 calc = expected_total
 
             expected_events.append(("check_budget", {"flight_price": fp, "nightly_price": hp, "hotel_nights": n, "lodging_total": lodging, "total_cost": calc, "budget": budget, "within_budget": calc is not None and calc <= budget}))
-            expected_events.append(("validate_selection", {"flight_id": o.get("flight_id"), "hotel_id": o.get("hotel_id"), "hotel_nights": n, "total_cost": o.get("total_cost"), "currency": o.get("currency")}))
 
             for event, (action, data) in zip(trace, expected_events):
                 exact_payload(event, action, data, errors)

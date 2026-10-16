@@ -83,8 +83,8 @@ class CheckBudgetOutput(Output):
 
 @dataclass
 class ValidateSelectionInput(Output):
-    """Input for validate_selection tool."""
-    pass
+    """Input for validate_selection tool (takes task input)."""
+    pass  # Actually takes TravelPlanningInput
 
 
 @dataclass
@@ -122,7 +122,7 @@ TOOLS = {
     Tool.SEARCH_FLIGHTS: (SearchFlightsInput, SearchFlightsOutput),
     Tool.SEARCH_HOTELS: (SearchHotelsInput, SearchHotelsOutput),
     Tool.CHECK_BUDGET: (CheckBudgetInput, CheckBudgetOutput),
-    Tool.VALIDATE_SELECTION: (ValidateSelectionInput, ValidateSelectionOutput),
+    Tool.VALIDATE_SELECTION: (TravelPlanningInput, ValidateSelectionOutput),
 }
 
 TASKS = {

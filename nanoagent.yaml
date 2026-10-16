@@ -34,7 +34,7 @@ tasks > dict[contract.Task, nanoagent.plugin.manifest.TaskConfig]:
   travel-planning:
     description: Select a flight and hotel within budget, respecting traveler preferences for specific flight and number of hotel nights
     runner: agent
-    tools: [load_request, search_flights, search_hotels, check_budget, validate_selection]
+    tools: [load_request, search_flights, search_hotels, check_budget]
     reference: validate_selection
     instructions: |-
       Goal: Select valid transport and lodging options within the requested budget.
@@ -44,7 +44,6 @@ tasks > dict[contract.Task, nanoagent.plugin.manifest.TaskConfig]:
       2. Call search_flights to get available flights and select the preferred flight ID
       3. Call search_hotels to get available hotels and select one in the destination city
       4. Call check_budget to calculate the total cost with full breakdown and verify it's within budget
-      5. Call validate_selection to confirm the final selection
 
       Critical Requirements:
       - You MUST select the preferred_flight_id from the request preferences
@@ -61,11 +60,10 @@ tasks > dict[contract.Task, nanoagent.plugin.manifest.TaskConfig]:
       - Re-check every selected ID and preference before finalizing
 
       Action Trace Evidence:
-      Your workflow must produce exactly 5 action trace events with complete data:
+      Your workflow must produce exactly 4 action trace events with complete data:
       1. load_request: {origin, destination, budget, currency}
       2. search_flights: {flight_ids: [all available], selected_flight_id}
       3. search_hotels: {hotel_ids: [all available], selected_hotel_id}
       4. check_budget: {flight_price, nightly_price, hotel_nights, lodging_total, total_cost, budget, within_budget}
-      5. validate_selection: {flight_id, hotel_id, hotel_nights, total_cost, currency}
 
       The verifier will independently recalculate all costs and verify every constraint.

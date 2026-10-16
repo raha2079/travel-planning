@@ -10,7 +10,9 @@ The plugin provides tools for the `travel-planning` task:
 - `search_flights` - Search available flights and select the preferred flight ID
 - `search_hotels` - Search available hotels in the destination city
 - `check_budget` - Calculate total cost (flight + hotel × nights) and verify within budget
-- `validate_selection` - Validate and return the final booking details (answer key)
+
+The reference tool (answer key, not available to agents):
+- `validate_selection` - Validates the correct final booking selection
 
 ## Layout
 

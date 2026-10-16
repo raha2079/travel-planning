@@ -39,15 +39,5 @@
       "budget": 1500,
       "within_budget": false
     }
-  },
-  {
-    "action": "validate_selection",
-    "data": {
-      "flight_id": "fl-2",
-      "hotel_id": "ht-1",
-      "hotel_nights": 3,
-      "total_cost": 1560,
-      "currency": "USD"
-    }
   }
 ]
